@@ -53,6 +53,26 @@ sudo make install
 ## Usage
 
 ```bash
+$ brane --help
+NAME:
+   brane - log and query your thoughts with the power of AI
+
+USAGE:
+   brane [global options] command [command options] [arguments...]
+
+VERSION:
+   0.1.0
+
+COMMANDS:
+   log, l  log a new thought
+   ask, a  ask the AI questions about your thoughts
+
+GLOBAL OPTIONS:
+   --directory value, -d value  the directory where note files are stored (default: "/home/james/.local/share/brane") [$BRANE_DIRECTORY]
+   --model value, -m value      the OpenAI model to use (default: "gpt-3.5-turbo-16k") [$BRANE_MODEL]
+   --key value, -k value        the OpenAI API key to use [$BRANE_KEY]
+   --help, -h                   show help
+   --version, -v                print the version
 ```
 
 See _brane(1)_ after installing for more information.
