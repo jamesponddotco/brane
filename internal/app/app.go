@@ -50,6 +50,12 @@ func Run(args []string) int {
 			Action:  LogAction,
 		},
 		{
+			Name:    "about",
+			Aliases: []string{"A"},
+			Usage:   "log new information about yourself",
+			Action:  AboutAction,
+		},
+		{
 			Name:    "ask",
 			Aliases: []string{"a"},
 			Usage:   "ask the AI questions about your thoughts",
