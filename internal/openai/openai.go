@@ -12,6 +12,13 @@ import (
 	"github.com/urfave/cli/v2"
 )
 
+// SystemPrompt is the system prompt to use when creating a chat completion request.
+const SystemPrompt string = "You're Brane, an expert personal assistant. Review " +
+	"the user's markdown document and answer any questions the user may have. " +
+	"Reply in an encouraging tone, but be concise and never ask follow up " +
+	"questions. Mention the user by name if their name is known to you. " +
+	"Current date: "
+
 // Client represents an OpenAI API client.
 type Client struct {
 	// ai is the OpenAI API client.
@@ -28,10 +35,6 @@ func NewClient(key string) *Client {
 // Request creates a chat completion request with streaming support for the
 // given prompt.
 func (c *Client) Request(ctx context.Context, model, prompt string) (*openai.ChatCompletionStream, error) {
-	systemPrompt := "You're Brane, an expert personal assistant. Review the user's markdown document and answer any " +
-		"questions the user may have. Reply in an encouraging tone, but be concise and never ask follow up " +
-		"questions. Today's date: " + time.Now().Format(time.DateOnly)
-
 	req := openai.ChatCompletionRequest{
 		Model: model,
 		Messages: []openai.ChatCompletionMessage{
@@ -41,7 +44,7 @@ func (c *Client) Request(ctx context.Context, model, prompt string) (*openai.Cha
 			},
 			{
 				Role:    openai.ChatMessageRoleSystem,
-				Content: systemPrompt,
+				Content: SystemPrompt + time.Now().Format(time.DateOnly),
 			},
 		},
 		Stream: true,
