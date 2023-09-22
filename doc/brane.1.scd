@@ -41,6 +41,9 @@ capabilities of OpenAI to query your notes.
 *l*, *log* [THOUGHT]
 	Log a new thought.
 
+*A*, *about* [INFORMATION]
+	Log new information about yourself to create a user profile.
+
 *a*, *ask* [QUERY]
 	Ask the AI questions about your thoughts.
 
@@ -60,7 +63,10 @@ capabilities of OpenAI to query your notes.
 *1. Log a new thought*
 	$ brane log "Had an amazing dinner at Joe's diner. The steak was delicious."
 
-*2. Ask the AI questions about your thoughts*
+*2. Log new information about yourself*
+	$ brane about "My name is John Doe and I love eating steaks."
+
+*3. Ask the AI questions about your thoughts*
 	$ brane ask "What did I eat last night?"
 
 # AUTHORS
