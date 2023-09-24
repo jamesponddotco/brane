@@ -50,7 +50,9 @@ func TestAboutAction(t *testing.T) {
 			name: "ErrorReadingFile",
 			args: []string{"info"},
 			setup: func(dir string) {
-				os.Mkdir(dir+"/"+app.Filename, 0o755) // Create directory with the name "About.md"
+				if err := os.Mkdir(dir+"/"+app.Filename, 0o755); err != nil {
+					t.Fatal(err)
+				}
 			},
 			wantErr: true,
 		},
@@ -58,7 +60,9 @@ func TestAboutAction(t *testing.T) {
 			name: "ErrorWritingFile",
 			args: []string{"info"},
 			setup: func(dir string) {
-				os.WriteFile(dir+"/"+app.Filename, []byte{}, 0o400) // Create a read-only file
+				if err := os.WriteFile(dir+"/"+app.Filename, []byte{}, 0o400); err != nil {
+					t.Fatal(err)
+				}
 			},
 			wantErr: true,
 		},
