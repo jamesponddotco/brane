@@ -42,6 +42,23 @@ func TestRun(t *testing.T) { //nolint:paralleltest // t.Setenv is not thread-saf
 			want: 1,
 		},
 		{
+			name: "about without input",
+			args: []string{"app", "about"},
+			want: 1,
+		},
+		{
+			name: "about with input",
+			args: []string{"app", "about", "Test"},
+			env:  map[string]string{"BRANE_DIRECTORY": "/tmp"},
+			want: 0,
+		},
+		{
+			name: "about without a directory",
+			args: []string{"app", "about", "Test"},
+			env:  map[string]string{"BRANE_DIRECTORY": ""},
+			want: 1,
+		},
+		{
 			name: "ask with question",
 			args: []string{"app", "ask", "What is Go?"},
 			env:  map[string]string{"BRANE_DIRECTORY": "/tmp", "BRANE_KEY": key},
