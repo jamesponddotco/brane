@@ -31,7 +31,7 @@ func Run(args []string) int {
 			Name:    "model",
 			Aliases: []string{"m"},
 			Usage:   "the OpenAI model to use",
-			Value:   openai.GPT3Dot5Turbo16K,
+			Value:   openai.GPT4,
 			EnvVars: []string{"BRANE_MODEL"},
 		},
 		&cli.StringFlag{
