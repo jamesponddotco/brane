@@ -60,6 +60,15 @@ func Run(args []string) int {
 			Aliases: []string{"a"},
 			Usage:   "ask the AI questions about your thoughts",
 			Action:  AskAction,
+			Flags: []cli.Flag{
+				&cli.StringFlag{
+					Name:    "language",
+					Aliases: []string{"l"},
+					Usage:   "the language the AI should respond in",
+					EnvVars: []string{"BRANE_LANGUAGE"},
+					Value:   "en",
+				},
+			},
 		},
 	}
 

@@ -30,6 +30,7 @@ func AskAction(ctx *cli.Context) error {
 		directory = ctx.String("directory")
 		key       = ctx.String("key")
 		model     = ctx.String("model")
+		language  = ctx.String("language")
 	)
 
 	if directory == "" {
@@ -50,7 +51,7 @@ func AskAction(ctx *cli.Context) error {
 		prompt = question + "\n\n" + notes
 	)
 
-	req, err := client.Request(ctx.Context, model, prompt)
+	req, err := client.Request(ctx.Context, model, language, prompt)
 	if err != nil {
 		return fmt.Errorf("failed to create request to OpenAI: %w", err)
 	}

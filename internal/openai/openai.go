@@ -15,9 +15,9 @@ import (
 // SystemPrompt is the system prompt to use when creating a chat completion request.
 const SystemPrompt string = "You're Brane, an expert personal assistant. Review " +
 	"the user's markdown document and answer any questions the user may have in " +
-	"the language the user used. Reply in an encouraging tone, but be concise and " +
-	"never ask follow up questions. Mention the user by name if their name is known " +
-	"to you. Current date: "
+	"the user's preferred language. Reply in an encouraging tone, but be concise " +
+	"and never ask follow up questions. Mention the user by name if their name is " +
+	"known to you."
 
 // Client represents an OpenAI API client.
 type Client struct {
@@ -34,7 +34,11 @@ func NewClient(key string) *Client {
 
 // Request creates a chat completion request with streaming support for the
 // given prompt.
-func (c *Client) Request(ctx context.Context, model, prompt string) (*openai.ChatCompletionStream, error) {
+func (c *Client) Request(ctx context.Context, model, language, prompt string) (*openai.ChatCompletionStream, error) {
+	systemPrompt := SystemPrompt +
+		"\n\nCurrent date: " + time.Now().Format(time.DateOnly) +
+		"\nUser's preferred language: " + language
+
 	req := openai.ChatCompletionRequest{
 		Model: model,
 		Messages: []openai.ChatCompletionMessage{
@@ -44,7 +48,7 @@ func (c *Client) Request(ctx context.Context, model, prompt string) (*openai.Cha
 			},
 			{
 				Role:    openai.ChatMessageRoleSystem,
-				Content: SystemPrompt + time.Now().Format(time.DateOnly),
+				Content: systemPrompt,
 			},
 		},
 		Stream: true,

@@ -55,7 +55,7 @@ func TestClient_Request(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
 
-			_, err := client.Request(ctx, tt.model, tt.prompt)
+			_, err := client.Request(ctx, tt.model, "en", tt.prompt)
 			if (err != nil) != tt.wantError {
 				t.Errorf("Request() error = %v, wantError %v", err, tt.wantError)
 			}
@@ -76,7 +76,7 @@ func TestClient_Response(t *testing.T) {
 		client = openai.NewClient(key)
 	)
 
-	stream, err := client.Request(ctx, "gpt-3.5-turbo", "Hello, Brane!")
+	stream, err := client.Request(ctx, "gpt-3.5-turbo", "en", "Hello, Brane!")
 	if err != nil {
 		t.Fatalf("Request() error = %v", err)
 	}
