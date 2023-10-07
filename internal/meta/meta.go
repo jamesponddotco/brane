@@ -6,7 +6,7 @@ const (
 	Name = "brane"
 
 	// Version is the version of the application.
-	Version = "0.1.0"
+	Version = "0.2.0"
 
 	// Description is the description of the application.
 	Description = "log and query your thoughts with the power of AI"
